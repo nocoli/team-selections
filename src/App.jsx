@@ -14,11 +14,13 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import AddIcon from '@material-ui/icons/Add';
+import PersonIcon from '@material-ui/icons/Person';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
-import AddNewPlayer from './AddNewPlayer';
+import ManagePlayers from './ManagePlayers';
 import {Switch} from 'react-router-dom';
+import api from './api'
 
-import data from './data/players.json'
+// import data from './data/players.json'
 
 const drawerWidth = 240;
 
@@ -27,8 +29,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
   },
   appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    zIndex: theme.zIndex.drawer + 1,
   },
   drawer: {
     width: drawerWidth,
@@ -37,11 +38,11 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
   },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  drawerContainer: {
+    overflow: 'auto',
+  },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
 }));
@@ -54,10 +55,11 @@ function App() {
       <Switch>
         <div className={classes.root}>
           <CssBaseline />
+          <img src={'Club-Logo.jpg'} alt={'Mater Hill Logo'} width="32"/>
           <AppBar position="fixed" className={classes.appBar}>
             <Toolbar>
               <Typography variant="h6" noWrap>
-                My Club player selections
+                {process.env.REACT_APP_CLUB_NAME} player selections
               </Typography>
             </Toolbar>
           </AppBar>
@@ -69,6 +71,7 @@ function App() {
             }}
             anchor="left"
           >
+            <Toolbar />
             <div className={classes.toolbar} />
             <Divider />
             <List>
@@ -79,23 +82,23 @@ function App() {
             </List>
             <Divider />
             <List>
-                <ListItem button component={Link} to="/AddNewPlayer">
-                  <ListItemIcon><AddIcon /></ListItemIcon>
-                  <ListItemText primary="Add new player" />
+                <ListItem button component={Link} to="/ManagePlayers">
+                  <ListItemIcon><PersonIcon /></ListItemIcon>
+                  <ListItemText primary="Manage Players" />
                 </ListItem>
             </List>
           </Drawer>
           <main className={classes.content}>
-            <div className={classes.toolbar} />
-            <Route path="/AddNewPlayer" render={(props) => {
-                return <AddNewPlayer players={data}/>;
+          <Toolbar />
+            <Route path="/ManagePlayers" render={(props) => {
+                return <ManagePlayers players={[]}/>;
             }}/>
             <Route exact path="/" render={(props) => {
                   return(
                     <div> 
                       <h1>Home</h1>
                     <Typography paragraph>
-                      Welcome to the My Club team selector
+                      Welcome to the {process.env.REACT_APP_CLUB_NAME} team selector
                     </Typography>
                   </div>
                   );
