@@ -6,8 +6,8 @@ const Schema = mongoose.Schema
 const Team = new Schema(
     {
         competition: { type: String, required: true },
-        season: seasonsModel,
-        captain: playerModel
+        season: {type: Schema.Types.ObjectId, ref: 'Season'},
+        captain: {type: Schema.Types.ObjectId, ref: 'Player'}
 
     },
     { timestamps: true },

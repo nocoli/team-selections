@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 
 const TeamSelection = new Schema(
     {
-        team: teamModel,
+        team: {type: Schema.Types.ObjectId, ref: 'Team'},
         round: { type: String, required: true },
         format: { type: String, required: true },
         startDate: { type: Date, required: true }

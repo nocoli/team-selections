@@ -4,6 +4,7 @@ const cors = require('cors')
 
 const db = require('./db')
 const playerRouter = require('./routes/player-router')
+const teamRouter = require('./routes/team-router')
 
 const app = express()
 const apiPort = 8000
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-app.use('/api', playerRouter)
+app.use('/api/players', playerRouter)
+app.use('/api/teams', teamRouter)
 
 app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`))

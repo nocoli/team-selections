@@ -4,10 +4,10 @@ const PlayerCtrl = require('../controllers/player-ctrl')
 
 const router = express.Router()
 
-router.post('/player', PlayerCtrl.createPlayer)
-router.put('/player/:id', PlayerCtrl.updatePlayer)
-router.delete('/player/:id', PlayerCtrl.deletePlayer)
-router.get('/player/:id', PlayerCtrl.getPlayerById)
-router.get('/players', PlayerCtrl.getPlayers)
+router.get('/all', PlayerCtrl.getPlayers)
+router.post('/', PlayerCtrl.createPlayer)
+router.put('/:id', PlayerCtrl.updatePlayer)
+router.delete('/:id', PlayerCtrl.deletePlayer)
+router.get('/:id', PlayerCtrl.getPlayerById)
 
 module.exports = router

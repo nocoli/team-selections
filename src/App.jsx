@@ -18,7 +18,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
 import ManagePlayers from './ManagePlayers';
 import {Switch} from 'react-router-dom';
+import GroupIcon from '@material-ui/icons/Group';
 import api from './api'
+import TeamSelections from './TeamSelections';
 
 // import data from './data/players.json'
 
@@ -86,12 +88,19 @@ function App() {
                   <ListItemIcon><PersonIcon /></ListItemIcon>
                   <ListItemText primary="Manage Players" />
                 </ListItem>
+                <ListItem button component={Link} to="/TeamSelections">
+                  <ListItemIcon><GroupIcon /></ListItemIcon>
+                  <ListItemText primary="Team Selections" />
+                </ListItem>
             </List>
           </Drawer>
           <main className={classes.content}>
           <Toolbar />
             <Route path="/ManagePlayers" render={(props) => {
                 return <ManagePlayers players={[]}/>;
+            }}/>
+            <Route path="/TeamSelections" render={(props) => {
+                return <TeamSelections players={[]}/>;
             }}/>
             <Route exact path="/" render={(props) => {
                   return(
